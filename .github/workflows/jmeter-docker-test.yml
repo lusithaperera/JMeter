@@ -1,0 +1,50 @@
+name: JMeter Docker Performance Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  docker-jmeter-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Create output directories
+      run: |
+        mkdir -p jmeter/results
+        mkdir -p jmeter/reports
+
+    - name: Run JMeter Test in Docker
+      run: |
+        docker run --rm \
+          -v "${PWD}:/jmeter" \
+          -w /jmeter \
+          justb4/jmeter:5.5 \
+          -n \
+          -t json-project.jmx \
+          -l jmeter/results/test-results.jtl \
+          -e \
+          -o jmeter/reports/html-report
+
+    - name: Upload JMeter Results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: jmeter-docker-results
+        path: |
+          jmeter/results/*.jtl
+          jmeter/reports/html-report/
+
+    - name: Check Test Results
+      run: |
+        if grep -q "false" jmeter/results/test-results.jtl; then
+          echo "Test failures found in JMeter results"
+          exit 1
+        else
+          echo "All tests passed successfully"
+        fi
