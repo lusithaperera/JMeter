@@ -62,9 +62,9 @@ jobs:
           justb4/jmeter:5.5 \
           -n \
           -t ${{ inputs.script_name }} \
-          -Jduration=${{ inputs.duration }} \
-          -Jrampup=${{ inputs.rampup }} \
-          -Juser_count=${{ inputs.user_count }} \
+          -Dduration=${{ inputs.duration }} \
+          -Drampup=${{ inputs.rampup }} \
+          -Duser_count=${{ inputs.user_count }} \
           -l jmeter/results/test-results.jtl \
           -e \
           -o jmeter/reports/html-report
