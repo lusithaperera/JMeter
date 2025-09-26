@@ -5,15 +5,15 @@ on:
     branches: [ main ]
     default:
       script_name: 'UI_Script.jmx'
-      duration: '5m'
-      rampup: '1m'
+      duration: '5'
+      rampup: '1'
       user_count: '1'
   pull_request:
     branches: [ main ]
     default:
       script_name: 'UI_Script.jmx'
-      duration: '5m'
-      rampup: '1m'
+      duration: '5'
+      rampup: '1'
       user_count: '1'
   workflow_dispatch:  # Allows manual triggering only
     inputs:
@@ -29,12 +29,12 @@ on:
         description: 'Test duration (e.g., 30s, 5m, 1h)'
         required: true
         type: string
-        default: '5m'
+        default: '5'
       rampup:
         description: 'Ramp-up time (e.g., 10s, 1m, 2m)'
         required: true
         type: string
-        default: '1m'
+        default: '1'
       user_count:
         description: 'Number of users to simulate'
         required: true

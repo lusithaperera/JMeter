@@ -13,12 +13,12 @@ on:
         description: 'Test duration (e.g., 30s, 5m, 1h)'
         required: true
         type: string
-        default: '5m'
+        default: '5'
       rampup:
         description: 'Ramp-up time (e.g., 10s, 1m, 2m)'
         required: true
         type: string
-        default: '1m'
+        default: '1'
       user_count:
         description: 'Number of users to simulate'
         required: true
