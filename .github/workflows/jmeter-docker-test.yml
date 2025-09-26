@@ -67,9 +67,9 @@ jobs:
           justb4/jmeter:5.5 \
           -n \
           -t ${{ env.SCRIPT_NAME }} \
-          -Jduration=${{ env.DURATION }} \
-          -Jrampup=${{ env.RAMPUP }} \
-          -Juser_count=${{ env.USER_COUNT }} \
+          -JDURATION=${{ env.DURATION }} \
+          -JRAMPUP=${{ env.RAMPUP }} \
+          -JUSER_COUNT=${{ env.USER_COUNT }} \
           -l jmeter/results/test-results.jtl \
           -e \
           -o jmeter/reports/html-report
