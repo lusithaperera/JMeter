@@ -3,10 +3,43 @@ name: JMeter Docker Performance Test
 on:
   push:
     branches: [ main ]
+    default:
+      script_name: 'UI_Script.jmx'
+      duration: '5m'
+      rampup: '1m'
+      user_count: '1'
   pull_request:
     branches: [ main ]
-  workflow_dispatch:
-
+    default:
+      script_name: 'UI_Script.jmx'
+      duration: '5m'
+      rampup: '1m'
+      user_count: '1'
+  workflow_dispatch:  # Allows manual triggering only
+    inputs:
+      script_name:
+        description: 'Script name to execute'
+        required: true
+        options:
+          - UI_Script.jmx
+          - json-project.jmx
+        type: string
+        default: 'UI_Script.jmx'
+      duration:
+        description: 'Test duration (e.g., 30s, 5m, 1h)'
+        required: true
+        type: string
+        default: '5m'
+      rampup:
+        description: 'Ramp-up time (e.g., 10s, 1m, 2m)'
+        required: true
+        type: string
+        default: '1m'
+      user_count:
+        description: 'Number of users to simulate'
+        required: true
+        type: string
+        default: '1'
 jobs:
   docker-jmeter-test:
     runs-on: ubuntu-latest
@@ -26,7 +59,10 @@ jobs:
           -w /jmeter \
           justb4/jmeter:5.5 \
           -n \
-          -t json-project.jmx \
+          -t ${{ inputs.script_name }} \
+          -Jduration=${{ inputs.duration }} \
+          -Jrampup=${{ inputs.rampup }} \
+          -Juser_count=${{ inputs.user_count }} \
           -l jmeter/results/test-results.jtl \
           -e \
           -o jmeter/reports/html-report

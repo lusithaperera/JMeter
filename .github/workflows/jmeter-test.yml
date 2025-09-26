@@ -1,12 +1,29 @@
 name: JMeter Performance Test
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:  # Allows manual triggering
 
+on:
+  workflow_dispatch:  # Allows manual triggering only
+    inputs:
+      script_name:
+        description: 'Script name to execute'
+        required: true
+        type: string
+        default: 'test-script.js'
+      duration:
+        description: 'Test duration (e.g., 30s, 5m, 1h)'
+        required: true
+        type: string
+        default: '5m'
+      rampup:
+        description: 'Ramp-up time (e.g., 10s, 1m, 2m)'
+        required: true
+        type: string
+        default: '1m'
+      user_count:
+        description: 'Number of users to simulate'
+        required: true
+        type: string
+        default: '1'
 jobs:
   performance-test:
     runs-on: ubuntu-latest
@@ -27,7 +44,10 @@ jobs:
         
     - name: Run JMeter Test
       run: |
-        apache-jmeter-5.6.2/bin/jmeter -n -t json-project.jmx \
+        apache-jmeter-5.6.2/bin/jmeter -n -t ${{ inputs.script_name }} \
+          -Jduration=${{ inputs.duration }} \
+          -Jrampup=${{ inputs.rampup }} \
+          -Juser_count=${{ inputs.user_count }} \
           -l test-results.jtl \
           -e -o html-report
 
