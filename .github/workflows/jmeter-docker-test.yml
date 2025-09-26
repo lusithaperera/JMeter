@@ -44,7 +44,7 @@ jobs:
           -w /jmeter \
           justb4/jmeter:5.5 \
           -n \
-          -t ${{ inputs.script_name }} \
+          -t ${{ github.event.inputs.script_name }} \
           -l jmeter/results/test-results.jtl \
           -e \
           -o jmeter/reports/html-report

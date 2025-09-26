@@ -33,7 +33,7 @@ jobs:
     - name: Run JMeter Tests
       uses: ./
       with:
-        test-plan-path: ./Day1/${{ github.event.inputs.test-file }}
+        test-plan-path: ./${{ github.event.inputs.test-file }}
         args: "-JUSER=${{ github.event.inputs.users }} -JRAMP=${{ github.event.inputs.rampup }} -JDURATION=${{ github.event.inputs.duration }} -e -o ./reports/html/"
         
     - name: Upload Results
