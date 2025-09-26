@@ -58,6 +58,11 @@ jobs:
         mkdir -p jmeter/results
         mkdir -p jmeter/reports
         
+    #copy the script name to the docker container
+    - name: Copy Script Name to Docker Container
+      run: |
+        docker cp ${{ env.SCRIPT_NAME }} jmeter/
+        
     - name: Run JMeter Test in Docker
       run: |
         docker run --rm \
