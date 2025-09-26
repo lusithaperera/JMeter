@@ -17,7 +17,9 @@ on:
       user_count: '1'
   workflow_dispatch:  # Allows manual triggering only
     inputs:
+    # this should be drop down menu
       script_name:
+        type: dropdown
         description: 'Script name to execute'
         required: true
         options:
