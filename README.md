@@ -65,7 +65,7 @@ To run tests locally:
 
 ### Direct Execution:
 ```bash
-jmeter -n -t UI_Script.jmx -l test-results.jtl -e -o html-report
+jmeter -n -t API_Script.jmx -l test-results.jtl -e -o html-report
 ```
 
 ### Docker Execution:
