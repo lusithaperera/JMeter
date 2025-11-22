@@ -6,7 +6,7 @@ This repository contains JMeter performance tests for JSON-based API testing. Th
 
 ```
 jmeter/
-├── json-project.jmx    # Main JMeter test plan
+├── UI_Script.jmx   # Main JMeter test plan
 ├── jsonproject.csv     # Test data file
 └── .github/
     └── workflows/
@@ -65,7 +65,7 @@ To run tests locally:
 
 ### Direct Execution:
 ```bash
-jmeter -n -t json-project.jmx -l test-results.jtl -e -o html-report
+jmeter -n -t UI_Script.jmx -l test-results.jtl -e -o html-report
 ```
 
 ### Docker Execution:
